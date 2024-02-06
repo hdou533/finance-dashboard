@@ -1,9 +1,47 @@
 
-import mongoose, { models } from "mongoose";
+import mongoose from "mongoose";
 import {loadType} from 'mongoose-currency'
-import { Schema, model, models} from "mongoose";
 
+const { Schema, model,models } = mongoose
 loadType(mongoose)
+
+const monthSchema = new Schema({
+    month: String,
+    revenue: {
+        type: mongoose.Types.Currency,
+            currency: "NZD",
+            get: (v) => v / 100
+    },
+    expenses: {
+        type: mongoose.Types.Currency,
+            currency: "NZD",
+            get: (v) => v / 100
+    },
+    operationalExpenses: {
+        type: mongoose.Types.Currency,
+            currency: "NZD",
+            get: (v) => v / 100
+    },
+    nonOperationalExpenses: {
+        type: mongoose.Types.Currency,
+            currency: "NZD",
+            get: (v) => v / 100
+    },
+}, { toJSON: { getters: true } })
+
+const daySchema = new Schema({
+    date: String,
+    revenue: {
+        type: mongoose.Types.Currency,
+            currency: "NZD",
+            get: (v) => v / 100
+    },
+    expenses: {
+        type: mongoose.Types.Currency,
+            currency: "NZD",
+            get: (v) => v / 100
+    },
+}, { toJSON: { getters: true } })
 
 const KPISchema = new Schema(
     {
@@ -22,7 +60,7 @@ const KPISchema = new Schema(
             currency: "NZD",
             get: (v) => v / 100
         },
-        expenseByCategory: {
+        expensesByCategory: {
             type: Map,
             of: {
                 type: mongoose.Types.Currency,
@@ -31,7 +69,9 @@ const KPISchema = new Schema(
             }
             
         },
-}
+        monthlyData: [monthSchema],
+        dailyData: [daySchema],
+}, {timestamps: true, toJSONL: { getters: true}}
 
 )
 
