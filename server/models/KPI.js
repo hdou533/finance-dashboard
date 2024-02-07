@@ -71,7 +71,7 @@ const KPISchema = new Schema(
         },
         monthlyData: [monthSchema],
         dailyData: [daySchema],
-}, {timestamps: true, toJSONL: { getters: true}}
+}, {timestamps: true, toJSON: { getters: true}}
 
 )
 

@@ -41,3 +41,12 @@ export interface GetProductsResponse {
   createAt: string;
   updateAt: string;
 }
+export interface GetTransactionsResponse {
+  _id: string;
+  __v: number;
+  amount: number;
+  buyer: string;
+  productIds: Array<string>;
+  createAt: string;
+  updateAt: string;
+}
