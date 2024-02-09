@@ -84,7 +84,6 @@ function Row3() {
     }
   }, [kpiData]);
 
-  console.log(pieChartData);
   return (
     <>
       <DashboardBox gridArea="g">
